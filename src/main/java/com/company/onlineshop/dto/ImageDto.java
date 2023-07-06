@@ -12,10 +12,10 @@ public class ImageDto {
     private String path;
     private String type;
     private byte[] data;
-    private Integer userId;
-    private Integer accountId;
-    private Integer cartId;
-    private Integer productId;
+  //  private Integer userId;
+   // private Integer accountId;
+   //private Integer cartId;
+   // private Integer productId;
     private Boolean status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
