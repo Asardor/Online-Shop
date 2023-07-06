@@ -1,9 +1,9 @@
 package com.company.onlineshop.repository;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.company.onlineshop.model.Order;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@Getter
-@Setter
-public class OrderRepository {
+@Repository
+public interface OrderRepository extends JpaRepository<Order, Integer> {
 }

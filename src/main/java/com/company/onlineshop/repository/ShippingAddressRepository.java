@@ -1,9 +1,11 @@
 package com.company.onlineshop.repository;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.company.onlineshop.model.ShippingAddress;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@Getter
-@Setter
-public class ShippingAddressRepository {
+@Repository
+public interface ShippingAddressRepository extends JpaRepository<ShippingAddress, Integer> {
+
+
 }

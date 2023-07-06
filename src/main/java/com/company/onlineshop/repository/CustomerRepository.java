@@ -1,9 +1,12 @@
 package com.company.onlineshop.repository;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.company.onlineshop.model.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@Getter
-@Setter
-public class CustomerRepository {
+import java.util.Optional;
+
+@Repository
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+    Optional<Customer> findByCustomerIdAndDeletedAtIsNull(Integer customerId);
 }
