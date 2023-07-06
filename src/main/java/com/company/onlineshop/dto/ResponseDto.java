@@ -1,24 +1,18 @@
 package com.company.onlineshop.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.List;
 
 @Getter
 @Setter
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ResponseDto<T> {
-
-    private int code;
-    private String message;
-    private boolean success;
-    private T date;
+    private String massage;
+    private Boolean success;
+    private T data;
     private List<ErrorDto> errors;
-
-
-
 }
