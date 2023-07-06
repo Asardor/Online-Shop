@@ -1,0 +1,12 @@
+Abdualim —> { CUSTOMER , SHIPPINGADDRESS , BILLINGADDRESS , SELESORDER , BASKET }
+Farrux ——>  { PRODUCT , CATEGORY , REPORTS , PRODUCT2 , PRODUCTBASE , SAVED }
+Sardor -—-> { USER , IMAGE ,AUTHORITY , ACCOUNT , CURT }
+
+
+
+@Table(name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "check_email", columnNames = "email"),
+                @UniqueConstraint(name = "constrain_phone_number", columnNames = "phone_number")},
+        indexes = @Index(name = "firstname_ix", columnList = "first_name", unique = true)
+)
