@@ -1,9 +1,10 @@
 package com.company.onlineshop.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
+
 
 @Getter
 @Setter
@@ -13,12 +14,10 @@ import java.util.List;
 @Builder
 public class ResponseDto<T> {
 
-    private int code;
-    private String message;
+    private String massage;
     private boolean success;
-    private T date;
+    private T data;
     private List<ErrorDto> errors;
 
-
-
 }
+

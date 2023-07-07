@@ -1,4 +1,4 @@
-package com.company.onlineshop.service.valid;
+package com.company.onlineshop.service.validate;
 
 import org.springframework.stereotype.Component;
 

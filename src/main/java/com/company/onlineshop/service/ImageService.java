@@ -5,7 +5,7 @@ import com.company.onlineshop.dto.ResponseDto;
 import com.company.onlineshop.model.Image;
 import com.company.onlineshop.repository.ImageRepository;
 import com.company.onlineshop.service.mapper.ImageMapper;
-import com.company.onlineshop.service.valid.ImageValidation;
+import com.company.onlineshop.service.validate.ImageValidation;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,7 +16,6 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

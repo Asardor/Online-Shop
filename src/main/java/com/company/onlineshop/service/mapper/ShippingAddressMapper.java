@@ -9,7 +9,8 @@ public abstract class ShippingAddressMapper {
 
 
     public abstract ShippingAddressDto toDto(ShippingAddress shippingAddress);
-//    public abstract ShippingAddressDto toDtoNot(ShippingAddress shippingAddress);
+
+    public abstract ShippingAddressDto toDtoNot(ShippingAddress shippingAddress);
 
 
     @Mapping(target = "createdAt", ignore = true)
