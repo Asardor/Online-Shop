@@ -57,7 +57,7 @@ public class BasketService {
         Optional<Basket> optional = this.basketRepository.findByBasketId(basketId);
         if (optional.isEmpty()) {
             return ResponseDto.<BasketDto>builder()
-                    .message("BillingAddressId is not found!")
+                    .message("Basket id is not found!")
                     .build();
         }
         Basket basket = optional.get();
@@ -65,7 +65,7 @@ public class BasketService {
         this.basketRepository.save(basket);
         return ResponseDto.<BasketDto>builder()
                 .success(true)
-                .message("Billing Address successful updated and save database")
+                .message("Basket successful updated and save database")
                 .data(this.basketMapper.toDtoNotProduct(basket))
                 .build();
     }
@@ -85,7 +85,7 @@ public class BasketService {
                             }
                     ).orElse(ResponseDto.<BasketDto>builder()
                             .success(false)
-                            .message(String.format("This %s billingAddressId is not found", billingAddressId))
+                            .message(String.format("This %s basketId is not found", billingAddressId))
                             .build());
         } catch (Exception e) {
             return ResponseDto.<BasketDto>builder()

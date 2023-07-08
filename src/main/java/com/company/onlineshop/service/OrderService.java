@@ -71,7 +71,7 @@ public class OrderService {
                     }).orElse(ResponseDto.<OrderDto>
                                     builder()
                             .success(false)
-                            .message("Billing Address is not found")
+                            .message("Order is not found")
                             .build());
         } catch (Exception e) {
                 return ResponseDto.<OrderDto>builder()
