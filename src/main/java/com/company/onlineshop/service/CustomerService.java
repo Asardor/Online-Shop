@@ -1,6 +1,5 @@
 package com.company.onlineshop.service;
 
-import com.company.onlineshop.dto.BasketDto;
 import com.company.onlineshop.dto.CustomerDto;
 import com.company.onlineshop.dto.ResponseDto;
 import com.company.onlineshop.model.Customer;
@@ -11,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,15 +26,13 @@ public class CustomerService {
             this.customerRepository.save(customer);
             return ResponseDto.<CustomerDto>builder()
                     .success(true)
-                    .code(0)
-                    .message("Ok")
-                    .date(this.customerMapper.toDtoNotBasketAndOrders(customer))
+                    .massage("Ok")
+                    .data(this.customerMapper.toDtoNotBasketAndOrders(customer))
                     .build();
 
         } catch (Exception e) {
             return ResponseDto.<CustomerDto>builder()
-                    .code(-3)
-                    .message(e.getMessage())
+                    .massage(e.getMessage())
                     .success(false)
                     .build();
         }
@@ -48,19 +44,16 @@ public class CustomerService {
             if (optional.isEmpty()) {
                 return ResponseDto.<CustomerDto>builder()
                         .message("Customer is not found!")
-                        .code(-1)
                         .build();
             }
             return ResponseDto.<CustomerDto>builder()
                     .success(true)
-                    .code(0)
                     .message("Ok")
                     .date(this.customerMapper.toDtoNotBasketAndOrders(optional.get()))
                     .build();
 
         } catch (Exception e) {
             return ResponseDto.<CustomerDto>builder()
-                    .code(-3)
                     .message(e.getMessage())
                     .success(false)
                     .build();
@@ -69,13 +62,11 @@ public class CustomerService {
         return this.customerRepository.findByCustomerIdAndDeletedAtIsNull(customerId)
                 .map(customer -> ResponseDto.<CustomerDto>builder()
                         .success(true)
-                        .message("Ok")
-                        .code(0)
-                        .date(this.customerMapper.toDto(customer))
+                        .massage("Ok")
+                        .data(this.customerMapper.toDto(customer))
                         .build())
                         .orElse(ResponseDto.<CustomerDto>builder()
-                                .message("Not found")
-                                .code(-1)
+                                .massage("Not found")
                                 .build());
 
     }

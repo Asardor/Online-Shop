@@ -24,7 +24,7 @@ public class ShippingAddressController {
         return shippingAddressService.get(shippingAddressId);
     }
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseDto<ShippingAddressDto> update(@RequestBody ShippingAddressDto dto, @PathVariable(value = "id") Integer shippingAddressId){
         return shippingAddressService.update(dto, shippingAddressId);
     }
