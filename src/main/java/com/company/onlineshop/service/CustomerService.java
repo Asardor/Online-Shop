@@ -26,13 +26,13 @@ public class CustomerService {
             this.customerRepository.save(customer);
             return ResponseDto.<CustomerDto>builder()
                     .success(true)
-                    .massage("Ok")
+                    .message("Ok")
                     .data(this.customerMapper.toDtoNotBasketAndOrders(customer))
                     .build();
 
         } catch (Exception e) {
             return ResponseDto.<CustomerDto>builder()
-                    .massage(e.getMessage())
+                    .message(e.getMessage())
                     .success(false)
                     .build();
         }
@@ -62,11 +62,11 @@ public class CustomerService {
         return this.customerRepository.findByCustomerIdAndDeletedAtIsNull(customerId)
                 .map(customer -> ResponseDto.<CustomerDto>builder()
                         .success(true)
-                        .massage("Ok")
+                        .message("Ok")
                         .data(this.customerMapper.toDto(customer))
                         .build())
                         .orElse(ResponseDto.<CustomerDto>builder()
-                                .massage("Not found")
+                                .message("Not found")
                                 .build());
 
     }

@@ -27,7 +27,7 @@ public record ImageService(
         try {
             return ResponseDto.<ImageDto>builder()
                     .success(true)
-                    .massage("Image successful create!")
+                    .message("Image successful create!")
                     .data(this.imageMapper.toDto(
                                     this.imageRepository.save(
                                             Image.builder()
@@ -42,7 +42,7 @@ public record ImageService(
                     .build();
         } catch (Exception e) {
             return ResponseDto.<ImageDto>builder()
-                    .massage("Image saving error massage :: " + e.getMessage())
+                    .message("Image saving error massage :: " + e.getMessage())
                     .success(false)
                     .build();
         }
@@ -54,19 +54,19 @@ public record ImageService(
                 ImageDto dto = this.imageMapper.toDto(image);
                 dto.setData(Files.readAllBytes(Path.of(image.getPath())));
                 return ResponseDto.<ImageDto>builder()
-                        .massage("Ok")
+                        .message("Ok")
                         .success(true)
                         .data(dto)
                         .build();
             } catch (IOException e) {
                 return ResponseDto.<ImageDto>builder()
-                        .massage("Error")
+                        .message("Error")
                         .success(false)
                         .build();
             }
         }).orElse(
                 ResponseDto.<ImageDto>builder()
-                        .massage("Not found")
+                        .message("Not found")
                         .success(false)
                         .build()
         );
@@ -83,7 +83,7 @@ public record ImageService(
                         try {
                             return ResponseDto.<ImageDto>builder()
                                     .success(true)
-                                    .massage("OK")
+                                    .message("OK")
                                     .data(this.imageMapper.toDto(
                                             this.imageRepository.save(
                                                     Image.builder()
@@ -97,18 +97,18 @@ public record ImageService(
                                     .build();
                         } catch (IOException e) {
                             return ResponseDto.<ImageDto>builder()
-                                    .massage("Image updating error massage :: " + e.getMessage())
+                                    .message("Image updating error massage :: " + e.getMessage())
                                     .success(false)
                                     .build();
                         }
                     })
                     .orElse(ResponseDto.<ImageDto>builder()
-                            .massage("Not found!")
+                            .message("Not found!")
                             .success(false)
                             .build());
         } catch (Exception e) {
             return ResponseDto.<ImageDto>builder()
-                    .massage("Image updating error massage :: " + e.getMessage())
+                    .message("Image updating error massage :: " + e.getMessage())
                     .success(false)
                     .build();
         }
@@ -125,18 +125,18 @@ public record ImageService(
                         image.setDeletedAt(LocalDateTime.now());
                         this.imageRepository.save(image);
                         return ResponseDto.<ImageDto>builder()
-                                .massage("Image successful deleted!")
+                                .message("Image successful deleted!")
                                 .data(this.imageMapper.toDto(image))
                                 .success(true)
                                 .build();
                     })
                     .orElse(ResponseDto.<ImageDto>builder()
-                            .massage("Not found!")
+                            .message("Not found!")
                             .success(false)
                             .build());
         } catch (Exception e) {
             return ResponseDto.<ImageDto>builder()
-                    .massage("Image deleting error massage :: " + e.getMessage())
+                    .message("Image deleting error massage :: " + e.getMessage())
                     .success(false)
                     .build();
         }

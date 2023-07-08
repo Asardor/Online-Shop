@@ -28,12 +28,12 @@ public class BasketService {
             this.basketRepository.save(basket);
             return ResponseDto.<BasketDto>builder()
                     .success(true)
-                    .massage("Ok")
+                    .message("Ok")
                     .data(this.basketMapper.toDtoNotProduct(basket))
                     .build();
         } catch (Exception e) {
             return ResponseDto.<BasketDto>builder()
-                    .massage(e.getMessage())
+                    .message(e.getMessage())
                     .success(false)
                     .build();
         }
@@ -56,12 +56,12 @@ public class BasketService {
 
         return basketRepository.findByBasketId(basketId)
                 .map(basket -> ResponseDto.<BasketDto>builder()
-                        .massage("Ok")
+                        .message("Ok")
                         .success(true)
                         .data(basketMapper.toDto(basket))
                         .build())
                 .orElse(ResponseDto.<BasketDto>builder()
-                        .massage("Basket is not found")
+                        .message("Basket is not found")
                         .success(false)
                         .build());
 
@@ -72,7 +72,7 @@ public class BasketService {
         Optional<Basket> optional = this.basketRepository.findByBasketId(basketId);
         if (optional.isEmpty()) {
             return ResponseDto.<BasketDto>builder()
-                    .massage("Basket is not found!")
+                    .message("Basket is not found!")
                     .build();
         }
         Basket basket = optional.get();
@@ -80,7 +80,7 @@ public class BasketService {
         this.basketRepository.save(basket);
         return ResponseDto.<BasketDto>builder()
                 .success(true)
-                .massage("Basket successful updated and save database")
+                .message("Basket successful updated and save database")
                 .data(this.basketMapper.toDtoNotProduct(basket))
                 .build();
 
@@ -91,13 +91,13 @@ public class BasketService {
         Optional<Basket> optional = this.basketRepository.findByBasketId(basketId);
         if (optional.isEmpty()) {
             return ResponseDto.<BasketDto>builder()
-                    .massage("Basket is not found!")
+                    .message("Basket is not found!")
                     .build();
         }
         this.basketRepository.delete(optional.get());
         return ResponseDto.<BasketDto>builder()
                 .success(true)
-                .massage("Basket successful deleted!")
+                .message("Basket successful deleted!")
                 .data(this.basketMapper.toDtoNotProduct(optional.get()))
                 .build();
     }

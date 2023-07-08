@@ -27,48 +27,28 @@ public class BillingAddressService {
             this.billingAddressRepository.save(billingAddress);
             return ResponseDto.<BillingAddressDto>builder()
                     .success(true)
-                    .massage("Ok")
+                    .message("Ok")
                     .data(this.billingAddressMapper.toDtoNotCart(billingAddress))
                     .build();
         } catch (Exception e) {
             return ResponseDto.<BillingAddressDto>builder()
-                    .massage(e.getMessage())
+                    .message(e.getMessage())
                     .success(false)
                     .build();
         }
     }
 
     public ResponseDto<BillingAddressDto> get(Integer billingAddressId) {
-      /*/  try {
-            Optional<BillingAddress> optional = this.billingAddressRepository.findByBillingAddressIdAndDeletedAtIsNull(billingAddressId);
-            if (optional.isEmpty()) {
-                return ResponseDto.<BillingAddressDto>builder()
-                        .massage("Billing Address is not found!")
-                        .build();
-            }
-
-            return ResponseDto.<BillingAddressDto>builder()
-                    .success(true)
-                    .massage("OK")
-                    .data(this.billingAddressMapper.toDto(optional.get()))
-                    .build();
-        } catch (Exception e) {
-            return ResponseDto.<BillingAddressDto>builder()
-                    .massage(e.getMessage())
-                    .success(false)
-                    .build();
-        }
-        */
         return this.billingAddressRepository.findByBillingAddressIdAndDeletedAtIsNull(billingAddressId)
                 .map(b ->ResponseDto.<BillingAddressDto>builder()
                         .success(true)
-                        .massage("Ok")
+                        .message("Ok")
                         .data(billingAddressMapper.toDto(b))
                         .build())
                 .orElse(ResponseDto.<BillingAddressDto>
                         builder()
                         .success(false)
-                        .massage("Billing Address is not found")
+                        .message("Billing Address is not found")
                         .build());
 
 
@@ -81,7 +61,7 @@ public class BillingAddressService {
             Optional<BillingAddress> optional = this.billingAddressRepository.findByBillingAddressIdAndDeletedAtIsNull(billingAddressId);
             if (optional.isEmpty()) {
                 return ResponseDto.<BillingAddressDto>builder()
-                        .massage("Billing Address is not found!")
+                        .message("Billing Address is not found!")
                         .build();
             }
             BillingAddress billingAddress= optional.get();
@@ -90,12 +70,12 @@ public class BillingAddressService {
             this.billingAddressRepository.save(billingAddress);
             return ResponseDto.<BillingAddressDto>builder()
                     .success(true)
-                    .massage("OK")
+                    .message("OK")
                     .data(this.billingAddressMapper.toDtoNotCart(optional.get()))
                     .build();
         } catch (Exception e) {
             return ResponseDto.<BillingAddressDto>builder()
-                    .massage(e.getMessage())
+                    .message(e.getMessage())
                     .success(false)
                     .build();
         }
@@ -106,7 +86,7 @@ public class BillingAddressService {
             Optional<BillingAddress> optional = this.billingAddressRepository.findByBillingAddressIdAndDeletedAtIsNull(billingAddressId);
             if (optional.isEmpty()) {
                 return ResponseDto.<BillingAddressDto>builder()
-                        .massage("Billing Address is not found!")
+                        .message("Billing Address is not found!")
                         .build();
             }
             BillingAddress billingAddress= optional.get();
@@ -114,12 +94,12 @@ public class BillingAddressService {
             this.billingAddressRepository.save(billingAddress);
             return ResponseDto.<BillingAddressDto>builder()
                     .success(true)
-                    .massage("OK")
+                    .message("OK")
                     .data(this.billingAddressMapper.toDtoNotCart(optional.get()))
                     .build();
         } catch (Exception e) {
             return ResponseDto.<BillingAddressDto>builder()
-                    .massage(e.getMessage())
+                    .message(e.getMessage())
                     .success(false)
                     .build();
         }

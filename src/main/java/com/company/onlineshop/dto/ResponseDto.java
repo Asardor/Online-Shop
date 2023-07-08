@@ -2,7 +2,6 @@ package com.company.onlineshop.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseDto<T> {
-    private String massage;
+    private String message;
     private Boolean success;
     private T data;
     private List<ErrorDto> errors;

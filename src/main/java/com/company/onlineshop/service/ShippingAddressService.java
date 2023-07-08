@@ -29,14 +29,14 @@ public class ShippingAddressService {
             address.setStatus(true);
             this.shippingAddressRepository.save(address);
             return ResponseDto.<ShippingAddressDto>builder()
-                    .massage("Ok")
+                    .message("Ok")
                     .success(true)
                     .data(this.shippingAddressMapper.toDtoNot(address))
                     .build();
         } catch (Exception e) {
             return ResponseDto.<ShippingAddressDto>builder()
                     .success(false)
-                    .massage(e.getMessage())
+                    .message(e.getMessage())
                     .build();
         }
 
@@ -47,12 +47,12 @@ public class ShippingAddressService {
                 .findByShippingAddressIdAndDeletedAtIsNull(shippingAddressId)
                 .map(shipping -> ResponseDto.<ShippingAddressDto>builder()
                         .success(true)
-                        .massage("Ok")
+                        .message("Ok")
                         .data(this.shippingAddressMapper.toDto(shipping))
                         .build())
                 .orElse(ResponseDto.<ShippingAddressDto>builder()
                         .success(false)
-                        .massage(String.format("This is %s shipping address is not found", shippingAddressId))
+                        .message(String.format("This is %s shipping address is not found", shippingAddressId))
                         .build());
     }
 
@@ -66,19 +66,19 @@ public class ShippingAddressService {
                                 shippingAddressRepository.save(shippingAddress);
                                 return ResponseDto.<ShippingAddressDto>builder()
                                         .success(true)
-                                        .massage("Successful updated")
+                                        .message("Successful updated")
                                         .data(this.shippingAddressMapper.toDtoNot(shippingAddress))
                                         .build();
                             }
                     ).orElse(ResponseDto.<ShippingAddressDto>builder()
                             .success(false)
-                            .massage(String.format("This is %s shipping address is not found", shippingAddressId))
+                            .message(String.format("This is %s shipping address is not found", shippingAddressId))
                             .build());
 
         } catch (Exception e) {
             return ResponseDto.<ShippingAddressDto>builder()
                     .success(false)
-                    .massage(e.getMessage())
+                    .message(e.getMessage())
                     .build();
         }
 
@@ -93,19 +93,19 @@ public class ShippingAddressService {
                                 shippingAddressRepository.save(shippingAddress);
                                 return ResponseDto.<ShippingAddressDto>builder()
                                         .success(true)
-                                        .massage("Successful updated")
+                                        .message("Successful updated")
                                         .data(this.shippingAddressMapper.toDtoNot(shippingAddress))
                                         .build();
                             }
                     ).orElse(ResponseDto.<ShippingAddressDto>builder()
                             .success(false)
-                            .massage(String.format("This is %s shipping address is not found", shippingAddressId))
+                            .message(String.format("This is %s shipping address is not found", shippingAddressId))
                             .build());
 
         } catch (Exception e) {
             return ResponseDto.<ShippingAddressDto>builder()
                     .success(false)
-                    .massage(e.getMessage())
+                    .message(e.getMessage())
                     .build();
         }
     }
