@@ -1,6 +1,5 @@
 package com.company.onlineshop.service;
 
-import com.company.onlineshop.dto.BillingAddressDto;
 import com.company.onlineshop.dto.OrderDto;
 import com.company.onlineshop.dto.ResponseDto;
 import com.company.onlineshop.model.Order;
@@ -30,7 +29,7 @@ public class OrderService {
             order.setStatus(true);
             this.orderRepository.save(order);
             return ResponseDto.<OrderDto>builder()
-                    .massage("Ok")
+                    .message("Ok")
                     .success(true)
                     .data(orderMapper.toDtoNotBasket(order))
                     .build();
@@ -38,7 +37,7 @@ public class OrderService {
         } catch (Exception e) {
             return ResponseDto.<OrderDto>builder()
                     .success(false)
-                    .massage(e.getMessage())
+                    .message(e.getMessage())
                     .build();
         }
     }
@@ -47,13 +46,13 @@ public class OrderService {
         return this.orderRepository.findByOrderIdAndDeletedAtIsNull(orderId)
                 .map(o ->ResponseDto.<OrderDto>builder()
                         .success(true)
-                        .massage("Ok")
+                        .message("Ok")
                         .data(orderMapper.toDto(o))
                         .build())
                 .orElse(ResponseDto.<OrderDto>
                                 builder()
                         .success(false)
-                        .massage("Billing Address is not found")
+                        .message("Billing Address is not found")
                         .build());
     }
 
@@ -66,24 +65,23 @@ public class OrderService {
                         orderRepository.save(order);
                         return ResponseDto.<OrderDto>builder()
                                 .success(true)
-                                .massage("Ok")
+                                .message("Ok")
                                 .data(orderMapper.toDto(order))
                                 .build();
                     }).orElse(ResponseDto.<OrderDto>
                                     builder()
                             .success(false)
-                            .massage("Billing Address is not found")
+                            .message("Billing Address is not found")
                             .build());
         } catch (Exception e) {
                 return ResponseDto.<OrderDto>builder()
                         .success(false)
-                        .massage(e.getMessage())
+                        .message(e.getMessage())
                         .build();
         }
     }
 
     public ResponseDto<OrderDto> delete(Integer orderId) {
-
         try {
             return orderRepository.findByOrderIdAndDeletedAtIsNull(orderId)
                     .map(order -> {
@@ -92,17 +90,17 @@ public class OrderService {
                         orderRepository.save(order);
                         return ResponseDto.<OrderDto>builder()
                                 .success(true)
-                                .massage("Ok")
+                                .message("Ok")
                                 .data(orderMapper.toDtoNotBasket(order))
                                 .build();
                     }).orElse(ResponseDto.<OrderDto>builder()
                             .success(false)
-                            .massage(String.format("This order %s is not found", orderId))
+                            .message(String.format("This order %s is not found", orderId))
                             .build());
         } catch (Exception e) {
             return ResponseDto.<OrderDto>builder()
                     .success(false)
-                    .massage(e.getMessage())
+                    .message(e.getMessage())
                     .build();
         }
 

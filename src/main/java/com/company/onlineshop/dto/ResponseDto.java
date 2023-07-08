@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 public class ResponseDto<T> {
 
-    private String massage;
+    private String message;
     private boolean success;
     private T data;
     private List<ErrorDto> errors;

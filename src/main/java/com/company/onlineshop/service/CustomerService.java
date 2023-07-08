@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,30 +27,8 @@ public class CustomerService {
             this.customerRepository.save(customer);
             return ResponseDto.<CustomerDto>builder()
                     .success(true)
-                    .massage("Ok")
-                    .data(this.customerMapper.toDtoNotBasketAndOrders(customer))
-                    .build();
-
-        } catch (Exception e) {
-            return ResponseDto.<CustomerDto>builder()
-                    .massage(e.getMessage())
-                    .success(false)
-                    .build();
-        }
-    }
-
-    public ResponseDto<CustomerDto> get(Integer customerId) {
-        /*try {
-            Optional<Customer> optional = this.customerRepository.findByCustomerIdAndDeletedAtIsNull(customerId);
-            if (optional.isEmpty()) {
-                return ResponseDto.<CustomerDto>builder()
-                        .message("Customer is not found!")
-                        .build();
-            }
-            return ResponseDto.<CustomerDto>builder()
-                    .success(true)
                     .message("Ok")
-                    .date(this.customerMapper.toDtoNotBasketAndOrders(optional.get()))
+                    .data(this.customerMapper.toDtoNotBasketAndOrders(customer))
                     .build();
 
         } catch (Exception e) {
@@ -57,25 +36,62 @@ public class CustomerService {
                     .message(e.getMessage())
                     .success(false)
                     .build();
-        }*/
+        }
+    }
 
+    public ResponseDto<CustomerDto> get(Integer customerId) {
         return this.customerRepository.findByCustomerIdAndDeletedAtIsNull(customerId)
                 .map(customer -> ResponseDto.<CustomerDto>builder()
                         .success(true)
-                        .massage("Ok")
+                        .message("Ok")
                         .data(this.customerMapper.toDto(customer))
                         .build())
-                        .orElse(ResponseDto.<CustomerDto>builder()
-                                .massage("Not found")
-                                .build());
+                .orElse(ResponseDto.<CustomerDto>builder()
+                        .message("Not found")
+                        .build());
 
     }
 
     public ResponseDto<CustomerDto> update(CustomerDto dto, Integer customerId) {
-        return null;
+        Optional<Customer> optional = this.customerRepository.findByCustomerIdAndDeletedAtIsNull(customerId);
+        if (optional.isEmpty()) {
+            return ResponseDto.<CustomerDto>builder()
+                    .message("Customer is not found!")
+                    .build();
+        }
+        Customer customer = optional.get();
+        this.customerMapper.update(dto, customer);
+        this.customerRepository.save(customer);
+        return ResponseDto.<CustomerDto>builder()
+                .success(true)
+                .message("Customer successful updated and save database")
+                .data(this.customerMapper.toDtoNotBasketAndOrders(customer))
+                .build();
     }
 
     public ResponseDto<CustomerDto> delete(Integer customerId) {
-        return null;
+        try {
+            return customerRepository.findByCustomerIdAndDeletedAtIsNull(customerId)
+                    .map(customer -> {
+                                customer.setDeletedAt(LocalDateTime.now());
+                                customer.setStatus(false);
+                                customerRepository.save(customer);
+                                return ResponseDto.<CustomerDto>builder()
+                                        .success(true)
+                                        .message("Successful updated")
+                                        .data(this.customerMapper.toDtoNotBasketAndOrders(customer))
+                                        .build();
+                            }
+                    ).orElse(ResponseDto.<CustomerDto>builder()
+                            .success(false)
+                            .message(String.format("This %s id customer is not found", customerId))
+                            .build());
+
+        } catch (Exception e) {
+            return ResponseDto.<CustomerDto>builder()
+                    .success(false)
+                    .message(e.getMessage())
+                    .build();
+        }
     }
 }
